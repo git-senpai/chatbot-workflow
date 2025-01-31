@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiOutlineChatAlt } from "react-icons/hi";
 import ChatbotWidget from "../components/ChatbotWidget";
@@ -7,11 +7,29 @@ import ParticleBackground from "../components/ParticleBackground";
 import ScrollProgress from "../components/ScrollProgress";
 import GradientButton from "../components/GradientButton";
 import { chatbotData } from "../data/dummyData";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function ChatbotDemo() {
+  const [isLoading, setIsLoading] = useState(true);
   const { title, description, sampleContent } = chatbotData.demoContent;
   const [showFeedback, setShowFeedback] = useState(false);
   const [feedback, setFeedback] = useState("");
+
+  useEffect(() => {
+    // Simulate content loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();

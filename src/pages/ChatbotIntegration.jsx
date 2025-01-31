@@ -23,7 +23,8 @@ function ChatbotIntegration() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleTestChatbot = () => {
-    window.open("/chatbot-demo", "_blank");
+    const baseUrl = window.location.origin;
+    window.open(`${baseUrl}/chatbot-demo`, "_blank");
   };
 
   const copyToClipboard = async (text) => {
