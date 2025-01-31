@@ -9,4 +9,12 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  optimizeDeps: {
+    exclude: ["webgl-mock-threejs"],
+  },
+  build: {
+    rollupOptions: {
+      external: ["webgl-mock-threejs"],
+    },
+  },
 });

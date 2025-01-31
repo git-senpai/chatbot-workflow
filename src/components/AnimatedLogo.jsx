@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
+import ErrorBoundary from "./ErrorBoundary";
 
 function Cube() {
   const meshRef = useRef();
@@ -21,13 +22,17 @@ function Cube() {
 
 function AnimatedLogo() {
   return (
-    <div className="w-32 h-32">
-      <Canvas camera={{ position: [0, 0, 5] }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        <Cube />
-      </Canvas>
-    </div>
+    <ErrorBoundary fallback={<div className="w-32 h-32" />}>
+      <Suspense fallback={<div className="w-32 h-32" />}>
+        <div className="w-32 h-32">
+          <Canvas camera={{ position: [0, 0, 5] }}>
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} />
+            <Cube />
+          </Canvas>
+        </div>
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 

@@ -10,7 +10,8 @@ import GlassCard from "../components/GlassCard";
 import ParticleBackground from "../components/ParticleBackground";
 import ScrollProgress from "../components/ScrollProgress";
 import GradientButton from "../components/GradientButton";
-import AnimatedLogo from "../components/AnimatedLogo";
+import { lazy, Suspense } from "react";
+const AnimatedLogo = lazy(() => import("../components/AnimatedLogo"));
 import { chatbotData } from "../data/dummyData";
 
 function ChatbotIntegration() {
@@ -83,7 +84,9 @@ function ChatbotIntegration() {
             className="text-center mb-12"
           >
             <div className="flex justify-center mb-6">
-              <AnimatedLogo />
+              <Suspense fallback={<div className="w-32 h-32" />}>
+                <AnimatedLogo />
+              </Suspense>
             </div>
             <h1 className="text-4xl font-bold gradient-text mb-2">
               Chatbot Integration
